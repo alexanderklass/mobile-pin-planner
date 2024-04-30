@@ -1,20 +1,22 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import login from './src/screens/login';
+import planner from './src/screens/planner';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    const Stack = createStackNavigator();
+    return (
+        <View className={'flex-1'}>
+            <StatusBar hidden={true} style="auto" />
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName={'Login'} screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={login} />
+                    <Stack.Screen name="Planner" component={planner} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </View>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

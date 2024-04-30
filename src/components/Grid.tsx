@@ -1,0 +1,113 @@
+import React, { useEffect } from 'react';
+import { View, Text } from 'react-native';
+import { globalStore } from '../store/global.store';
+import { initLaneData, startTimeList } from '../init/initGridData';
+
+const Grid = () => {
+    const { gridData, setGridData, date, customerList } = globalStore();
+    const time = startTimeList;
+
+    const fetchCustomerList = () => {
+        const updatedLane = initLaneData(12);
+        const filteredCustomerList = customerList.filter((item: any) => {
+            return item.date === date;
+        });
+        filteredCustomerList.forEach((item: any) => {
+            //const price = calcLanePrice(item);
+            for (let i = item.startLane; i <= item.endLane; i++) {
+                for (let j = item.startTime; j <= item.endTime; j++) {
+                    updatedLane[i].time[j] = {
+                        ...updatedLane[i].time[j],
+                        uID: item.uID,
+                        customerName: item.customerName,
+                        customerNumber: item.customerNumber,
+                        date: item.date,
+                        customerNotes: item.customerNotes,
+                        workerName: item.workerName,
+                        startLane: item.startLane,
+                        endLane: item.endLane,
+                        startTime: item.startTime,
+                        endTime: item.endTime,
+                        customerColor: item.customerColor,
+                        payedStatus: item.payedStatus,
+                        price: 0,
+                    };
+                }
+            }
+        });
+        setGridData(updatedLane);
+    };
+
+    const LaneGrid = () => {
+        return (
+            <View className={'flex flex-row'}>
+                <Text className={'w-[40px] border border-gray-600 bg-gray-300'}></Text>
+                {Array.from({ length: 12 }, (time, index) => {
+                    return (
+                        <Text key={index} className={'text-xl w-[27px] text-center border border-gray-600 bg-gray-200'}>
+                            {index + 1}
+                        </Text>
+                    );
+                })}
+            </View>
+        );
+    };
+
+    const TimeGrid = () => {
+        return (
+            <View className={'flex flex-col'}>
+                {time.map((time, index) => {
+                    return (
+                        <Text
+                            key={index}
+                            className={'h-[25px] text-center w-[40px] border border-gray-600 bg-gray-200'}
+                        >
+                            {time}
+                        </Text>
+                    );
+                })}
+            </View>
+        );
+    };
+
+    const CustomerGrid = () => {
+        return (
+            <View className={'flex flex-row'}>
+                {gridData.map((lane, index) => {
+                    return (
+                        <View key={index} className={'flex h-full flex-col'}>
+                            {lane.time.map((time, index) => {
+                                return (
+                                    <View
+                                        key={index}
+                                        className={`${time.customerColor ? time.customerColor : 'bg-gray-200'} border border-gray-600 w-[27px] h-[25px]`}
+                                    >
+                                        <Text className={'text-center text-white'}>
+                                            {time.customerName.split('')[0]}
+                                        </Text>
+                                    </View>
+                                );
+                            })}
+                        </View>
+                    );
+                })}
+            </View>
+        );
+    };
+
+    useEffect(() => {
+        fetchCustomerList();
+    }, [date, customerList]);
+
+    return (
+        <View className={'flex flex-col'}>
+            <LaneGrid />
+            <View className={'flex flex-row'}>
+                <TimeGrid />
+                <CustomerGrid />
+            </View>
+        </View>
+    );
+};
+
+export default Grid;

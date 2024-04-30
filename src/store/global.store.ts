@@ -1,0 +1,24 @@
+import { create } from 'zustand';
+import { IGlobalStore } from '../Types/TypeCollection';
+
+export const globalStore = create<IGlobalStore>((set) => ({
+    loginData: {},
+    setLoginData: (user: any) => set({ loginData: user }),
+
+    date: new Date(),
+    setDate: (newDate) => set({ date: newDate }),
+    calendar: false,
+    setCalendar: (toggle) => set({ calendar: toggle }),
+    currentWeekDay: '',
+    setCurrenWeekDay: (weekDay: string) => set({ currentWeekDay: weekDay }),
+
+    bookingModal: false,
+    setBookingModal: (bookingModal: boolean) => set({ bookingModal: bookingModal }),
+    bookingData: [],
+    setBookingData: (data: any[]) => set({ bookingData: data }),
+
+    setGridData: (data) => set({ gridData: data }),
+    gridData: [],
+    customerList: [],
+    setCustomerList: (data) => set({ customerList: data }),
+}));
