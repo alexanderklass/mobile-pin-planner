@@ -1,11 +1,11 @@
 import React from 'react';
 import CustomButton from '../CustomButton';
 import { colorPicker } from '../../utils/colorListPicker';
-import { startTimeList, endTimeList } from '../../init/initGridData';
 import { emitToast } from '../../utils/emitToast';
-import Select from '../Select';
 import { View, Text, TextInput } from 'react-native';
 import { globalStore } from '../../store/global.store';
+import uuid from 'react-native-uuid';
+import Select from '../Select';
 import ModalLayout from './ModalLayout';
 
 const BookingModal = () => {
@@ -23,7 +23,7 @@ const BookingModal = () => {
 
     const handleFormOnChange = (value: string | number, name: string) => {
         if (value === null || value === undefined) return;
-        setBookingData({ ...bookingData, [name]: value, date: date, customerColor: colorPicker() });
+        setBookingData({ ...bookingData, [name]: value });
     };
 
     const selectTimeData = (list: any) => {
@@ -50,7 +50,10 @@ const BookingModal = () => {
             emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
             return;
         }
-        setCustomerList([...customerList, bookingData]);
+        setCustomerList([
+            ...customerList,
+            { ...bookingData, date: date, customerColor: colorPicker(), uID: uuid.v4() },
+        ]);
         emitToast('success', 'Buchung erfolgreich hinzugefügt');
         closeBooking();
     };
