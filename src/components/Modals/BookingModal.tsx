@@ -6,6 +6,7 @@ import { emitToast } from '../../utils/emitToast';
 import Select from '../Select';
 import { View, Text, TextInput } from 'react-native';
 import { globalStore } from '../../store/global.store';
+import ModalLayout from './ModalLayout';
 
 const BookingModal = () => {
     const { bookingModal, setBookingModal, bookingData, setBookingData, customerList, setCustomerList, date } =
@@ -31,16 +32,6 @@ const BookingModal = () => {
         });
     };
 
-    const addCustomer = () => {
-        if (checkIfCanAddCustomer()) {
-            emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
-            return;
-        }
-        setCustomerList([...customerList, bookingData]);
-        emitToast('success', 'Buchung erfolgreich hinzugefügt');
-        closeBooking();
-    };
-
     const checkIfCanAddCustomer = () => {
         const filteredList = customerList.filter((item: any) => {
             return (
@@ -52,6 +43,16 @@ const BookingModal = () => {
             );
         });
         return filteredList.length > 0;
+    };
+
+    const addCustomer = () => {
+        if (checkIfCanAddCustomer()) {
+            emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
+            return;
+        }
+        setCustomerList([...customerList, bookingData]);
+        emitToast('success', 'Buchung erfolgreich hinzugefügt');
+        closeBooking();
     };
 
     const activeBookingButton = () => {
@@ -67,85 +68,77 @@ const BookingModal = () => {
     };
 
     return (
-        <View className={'absolute'}>
-            {bookingModal && (
-                <View className={'bg-blue-300 w-[250px] flex border p-2'}>
-                    <View className={'flex flex-col justify-center gap-2'}>
-                        <Text>BOOKING MODAL</Text>
-                        <View className={'space-y-1'}>
-                            <TextInput
-                                onChangeText={(value) => handleFormOnChange(value, 'customerName')}
-                                className={'bg-white border-red-500 border p-3'}
-                                placeholder={'Name'}
-                            />
-                            <TextInput
-                                onChangeText={(value) => handleFormOnChange(value, 'customerNumber')}
-                                className={'bg-white border-red-500 border p-3'}
-                                placeholder={'Telefonnummer'}
-                            />
-                            <View className={'flex flex-row justify-center items-center'}>
-                                <Select
-                                    onChange={(value) => {
-                                        handleFormOnChange(value, 'startLane');
-                                    }}
-                                    data={Array.from({ length: 12 }).map((item: any, index: number) => {
-                                        return { label: `${index + 1}`, value: index, key: index };
-                                    })}
-                                />
-                                <Select
-                                    onChange={(value) => {
-                                        handleFormOnChange(value, 'endLane');
-                                    }}
-                                    data={Array.from({ length: 12 }).map((item: any, index: number) => {
-                                        return { label: `${index + 1}`, value: index, key: index };
-                                    })}
-                                />
-                            </View>
-
-                            <View className={'flex flex-row justify-center items-center'}>
-                                <Select
-                                    onChange={(value) => {
-                                        handleFormOnChange(value, 'startTime');
-                                    }}
-                                    data={selectTimeData(startTimeList)}
-                                />
-                                <Select
-                                    onChange={(value) => {
-                                        handleFormOnChange(value, 'endTime');
-                                    }}
-                                    data={selectTimeData(endTimeList)}
-                                />
-                            </View>
-
-                            <TextInput
-                                onChangeText={(value) => handleFormOnChange(value, 'workerName')}
-                                className={'bg-white p-3'}
-                                placeholder={'Eingetragen von...'}
-                            />
-
-                            <TextInput
-                                onChangeText={(value) => handleFormOnChange(value, 'customerNotes')}
-                                className={'bg-white p-3'}
-                                placeholder={'Notizen...'}
-                            />
-                        </View>
-                        <View className={'flex flex-row items-center justify-around'}>
-                            <CustomButton
-                                disabled={activeBookingButton()}
-                                style={'bg-green-500 border w-[90px] p-1'}
-                                onPress={addCustomer}
-                                text={'Add'}
-                            ></CustomButton>
-                            <CustomButton
-                                style={'bg-red-500 border w-[90px] p-1'}
-                                text={'Close'}
-                                onPress={closeBooking}
-                            ></CustomButton>
-                        </View>
-                    </View>
+        <ModalLayout toggleWindow={bookingModal}>
+            <Text>BOOKING MODAL</Text>
+            <View className={'space-y-1'}>
+                <TextInput
+                    onChangeText={(value) => handleFormOnChange(value, 'customerName')}
+                    className={'bg-white border-red-500 border p-3'}
+                    placeholder={'Name'}
+                />
+                <TextInput
+                    onChangeText={(value) => handleFormOnChange(value, 'customerNumber')}
+                    className={'bg-white border-red-500 border p-3'}
+                    placeholder={'Telefonnummer'}
+                />
+                <View className={'flex flex-row justify-center items-center'}>
+                    <Select
+                        onChange={(value) => {
+                            handleFormOnChange(value, 'startLane');
+                        }}
+                        selectType={'lane'}
+                    />
+                    <Select
+                        onChange={(value) => {
+                            handleFormOnChange(value, 'endLane');
+                        }}
+                        selectType={'lane'}
+                    />
                 </View>
-            )}
-        </View>
+
+                <View className={'flex flex-row justify-center items-center'}>
+                    <Select
+                        onChange={(value) => {
+                            handleFormOnChange(value, 'startTime');
+                        }}
+                        selectType={'time'}
+                        timeType={'startTime'}
+                    />
+                    <Select
+                        onChange={(value) => {
+                            handleFormOnChange(value, 'endTime');
+                        }}
+                        selectType={'time'}
+                        timeType={'endTime'}
+                    />
+                </View>
+
+                <TextInput
+                    onChangeText={(value) => handleFormOnChange(value, 'workerName')}
+                    className={'bg-white p-3'}
+                    placeholder={'Eingetragen von...'}
+                />
+
+                <TextInput
+                    onChangeText={(value) => handleFormOnChange(value, 'customerNotes')}
+                    className={'bg-white p-3'}
+                    placeholder={'Notizen...'}
+                />
+            </View>
+            <View className={'flex flex-row items-center justify-around'}>
+                <CustomButton
+                    disabled={activeBookingButton()}
+                    style={'bg-green-500 border w-[90px] p-1'}
+                    onPress={addCustomer}
+                    text={'Add'}
+                ></CustomButton>
+                <CustomButton
+                    style={'bg-red-500 border w-[90px] p-1'}
+                    text={'Close'}
+                    onPress={closeBooking}
+                ></CustomButton>
+            </View>
+        </ModalLayout>
     );
 };
 

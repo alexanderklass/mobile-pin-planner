@@ -6,6 +6,7 @@ import DateHeader from '../components/DateHeader';
 import DatePicker from '../components/DatePicker';
 import BookingModal from '../components/Modals/BookingModal';
 import ToastMessage from '../components/ToastMessage';
+import OptionsModal from '../components/Modals/OptionsModal';
 
 const Planner = () => {
     return (
@@ -13,6 +14,7 @@ const Planner = () => {
             <DateHeader />
             <Grid />
             <BookingModal />
+            <OptionsModal />
             <BottomBar />
             <DatePicker />
             <ToastMessage />

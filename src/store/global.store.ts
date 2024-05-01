@@ -17,8 +17,13 @@ export const globalStore = create<IGlobalStore>((set) => ({
     bookingData: [],
     setBookingData: (data: any[]) => set({ bookingData: data }),
 
-    setGridData: (data) => set({ gridData: data }),
+    optionsModal: false,
+    setOptionsModal: (toggle) => set({ optionsModal: toggle }),
+    optionsData: [],
+    setOptionsData: (data: any[]) => set({ optionsData: data }),
+
     gridData: [],
+    setGridData: (data) => set({ gridData: data }),
     customerList: [],
     setCustomerList: (data) => set({ customerList: data }),
 }));

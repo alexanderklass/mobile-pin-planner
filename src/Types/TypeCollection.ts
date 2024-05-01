@@ -14,6 +14,11 @@ export interface IGlobalStore {
     bookingData: any;
     setBookingData: (bookingData: any) => void;
 
+    setOptionsModal: (optionsData: boolean) => void;
+    optionsModal: boolean;
+    optionsData: any;
+    setOptionsData: (optionsData: any) => void;
+
     gridData: IBahn[];
     setGridData: (data: IBahn[]) => void;
 

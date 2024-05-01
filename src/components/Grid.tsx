@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { globalStore } from '../store/global.store';
 import { initLaneData, startTimeList } from '../init/initGridData';
 
 const Grid = () => {
-    const { gridData, setGridData, date, customerList } = globalStore();
+    const { gridData, setGridData, date, customerList, setOptionsData, setOptionsModal, optionsModal } = globalStore();
     const time = startTimeList;
 
     const fetchCustomerList = () => {
@@ -36,6 +36,11 @@ const Grid = () => {
             }
         });
         setGridData(updatedLane);
+    };
+
+    const customerPressed = (laneIndex: number, timeIndex: number) => {
+        setOptionsData(gridData[laneIndex].time[timeIndex]);
+        setOptionsModal(true);
     };
 
     const LaneGrid = () => {
@@ -73,18 +78,27 @@ const Grid = () => {
     const CustomerGrid = () => {
         return (
             <View className={'flex flex-row'}>
-                {gridData.map((lane, index) => {
+                {gridData.map((lane, laneIndex) => {
                     return (
-                        <View key={index} className={'flex h-full flex-col'}>
-                            {lane.time.map((time, index) => {
+                        <View key={laneIndex} className={'flex h-full flex-col'}>
+                            {lane.time.map((time, timeIndex) => {
                                 return (
                                     <View
-                                        key={index}
+                                        key={timeIndex}
                                         className={`${time.customerColor ? time.customerColor : 'bg-gray-200'} border border-gray-600 w-[27px] h-[25px]`}
                                     >
-                                        <Text className={'text-center text-white'}>
-                                            {time.customerName.split('')[0]}
-                                        </Text>
+                                        {time.customerName && (
+                                            <Pressable
+                                                className={'w-full h-full'}
+                                                onPress={() => customerPressed(laneIndex, timeIndex)}
+                                            >
+                                                {time.startLane === laneIndex && time.startTime === timeIndex && (
+                                                    <Text className={'text-center text-white'}>
+                                                        {time.customerName.split('')[0]}
+                                                    </Text>
+                                                )}
+                                            </Pressable>
+                                        )}
                                     </View>
                                 );
                             })}
