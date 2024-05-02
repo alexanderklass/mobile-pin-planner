@@ -1,19 +1,29 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, Pressable, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 export interface ICustomer {
     name: string;
     time: string;
     notes: string;
+    onPress?: () => void;
+    color: string;
 }
 
-const Customer = ({ name, time, notes }: ICustomer) => {
+const Customer = ({ name, time, notes, onPress, color }: ICustomer) => {
     return (
-        <View className={'bg-blue-500 max-w-[395px] w-[390px] flex items my-1'}>
-            <Text>{name}</Text>
-            <Text>{time}</Text>
-            <Text>{notes}</Text>
-        </View>
+        <Pressable onPress={onPress} className={`${color} w-[395px] px-4 flex items-center flex-row my-1`}>
+            <View className={'pr-5'}>
+                <View className={'bg-black rounded-md'}>
+                    <Icon color={'white'} size={40} name={'user'} />
+                </View>
+            </View>
+            <View>
+                <Text>{name}</Text>
+                <Text>{time}</Text>
+                <Text>{notes}</Text>
+            </View>
+        </Pressable>
     );
 };
 

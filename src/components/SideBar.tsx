@@ -15,23 +15,23 @@ const SideBar = () => {
     };
 
     return (
-        <View className={'absolute right-0 h-full'}>
+        <View className={'absolute right-0 h-full w-full'}>
             {toggleSidebar && (
                 <View className={'relative'}>
                     <View className={'bg-blue-500 justify-center p-3 flex items-center h-full'}>
                         <CustomButton
                             onPress={() => handleSidebarButton(0)}
-                            style={'bg-green-300 m-1 rounded-md'}
+                            style={'bg-green-300 w-full m-1 rounded-md'}
                             text={'Planner'}
                         />
                         <CustomButton
                             onPress={() => handleSidebarButton(1)}
-                            style={'bg-purple-300 m-1 rounded-md'}
+                            style={'bg-purple-300 w-full m-1 rounded-md'}
                             text={'Kunden'}
                         />
                         <CustomButton
                             onPress={() => handleSidebarButton(2)}
-                            style={'bg-yellow-300 m-1 rounded-md'}
+                            style={'bg-yellow-300 w-full m-1 rounded-md'}
                             text={'Notizen'}
                         />
                         <CustomButton
