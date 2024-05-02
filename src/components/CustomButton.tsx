@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 export interface ICustomButton {
     text?: string;
@@ -10,13 +10,13 @@ export interface ICustomButton {
 
 const CustomButton = ({ text, style, onPress, disabled }: ICustomButton) => {
     return (
-        <Pressable
+        <TouchableOpacity
             disabled={disabled}
             className={`${style} ${disabled && 'bg-gray-200'} transition-all flex p-3 items-center justify-center`}
             onPress={onPress}
         >
             <Text>{text}</Text>
-        </Pressable>
+        </TouchableOpacity>
     );
 };
 

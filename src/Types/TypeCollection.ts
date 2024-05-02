@@ -19,6 +19,11 @@ export interface IGlobalStore {
     optionsData: any;
     setOptionsData: (optionsData: any) => void;
 
+    toggleSidebar: boolean;
+    setToggleSidebar: (toggle: boolean) => void;
+    sidebarIndex: number;
+    setSidebarIndex: (index: number) => void;
+
     gridData: IBahn[];
     setGridData: (data: IBahn[]) => void;
 

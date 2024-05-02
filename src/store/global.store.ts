@@ -22,6 +22,11 @@ export const globalStore = create<IGlobalStore>((set) => ({
     optionsData: [],
     setOptionsData: (data: any[]) => set({ optionsData: data }),
 
+    toggleSidebar: false,
+    setToggleSidebar: (toggle) => set({ toggleSidebar: toggle }),
+    sidebarIndex: 0,
+    setSidebarIndex: (index: number) => set({ sidebarIndex: index }),
+
     gridData: [],
     setGridData: (data) => set({ gridData: data }),
     customerList: [],

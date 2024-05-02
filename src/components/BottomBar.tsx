@@ -1,9 +1,9 @@
 import BottomButton from '../components/BottomButton';
-import { View, Platform, Text, Keyboard } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { useEffect, useState } from 'react';
 import { globalStore } from '../store/global.store';
 const BottomBar = () => {
-    const { setCalendar, setBookingModal } = globalStore();
+    const { setCalendar, setBookingModal, setToggleSidebar } = globalStore();
     const [keyboardStatus, setKeyboardStatus] = useState<boolean>(false);
 
     const openBooking = () => {
@@ -14,8 +14,8 @@ const BottomBar = () => {
         setCalendar(true);
     };
 
-    const openSettings = () => {
-        console.log('open Settings');
+    const openSidebar = () => {
+        setToggleSidebar(true);
     };
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const BottomBar = () => {
             <View className={`flex w-full flex-row justify-around`}>
                 <BottomButton onPress={openCalendar} name={'calendar'} size={30} />
                 <BottomButton onPress={openBooking} name={'plus'} size={50} />
-                <BottomButton onPress={openSettings} name={'settings'} size={30} />
+                <BottomButton onPress={openSidebar} name={'sidebar'} size={30} />
             </View>
         </View>
     );

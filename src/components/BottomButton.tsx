@@ -1,5 +1,4 @@
-import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 export interface IBottomButton {
@@ -10,9 +9,12 @@ export interface IBottomButton {
 
 const BottomButton = ({ onPress, name = 'plus', size = 30 }: IBottomButton) => {
     return (
-        <Pressable className={'rounded-md flex h-fit w-fit items-center justify-center'} onPress={onPress}>
-            <Icon color={'black'} name={name} size={size} />
-        </Pressable>
+        <TouchableOpacity
+            className={`rounded-md bg-blue-500 w-[60px] flex h-fit items-center justify-center`}
+            onPress={onPress}
+        >
+            <Icon color={'white'} name={name} size={size} />
+        </TouchableOpacity>
     );
 };
 
