@@ -34,11 +34,6 @@ const SideBar = () => {
                             style={'bg-yellow-300 w-full m-1 rounded-md'}
                             text={'Notizen'}
                         />
-                        <CustomButton
-                            onPress={closeSidebar}
-                            style={'bg-gray-200 w-[60px] rounded-md absolute bottom-20'}
-                            text={'X'}
-                        />
                     </View>
                 </View>
             )}

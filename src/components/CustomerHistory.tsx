@@ -6,6 +6,7 @@ const CustomerHistory = () => {
     const { customerList, date, gridData, setOptionsData, setSidebarIndex, setOptionsModal } = globalStore();
 
     const filteredCustomer = customerList.filter((customer: any) => customer.date === date);
+
     const handleCustomerClicked = (laneIndex: number, timeIndex: number) => {
         setOptionsData(gridData[laneIndex].time[timeIndex]);
         setSidebarIndex(0);

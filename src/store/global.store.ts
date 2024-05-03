@@ -27,6 +27,11 @@ export const globalStore = create<IGlobalStore>((set) => ({
     sidebarIndex: 0,
     setSidebarIndex: (index: number) => set({ sidebarIndex: index }),
 
+    notes: {},
+    setNotes: (data) => set({ notes: data }),
+    notesList: [],
+    setNotesList: (data) => set({ notesList: data }),
+
     gridData: [],
     setGridData: (data) => set({ gridData: data }),
     customerList: [],

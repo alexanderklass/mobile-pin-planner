@@ -24,11 +24,23 @@ export interface IGlobalStore {
     sidebarIndex: number;
     setSidebarIndex: (index: number) => void;
 
+    notes: any;
+    setNotes: (data: any) => void;
+    notesList: IDailyNotes[];
+    setNotesList: (data: IDailyNotes[]) => void;
+
     gridData: IBahn[];
     setGridData: (data: IBahn[]) => void;
 
     customerList: any;
     setCustomerList: (data: any) => void;
+}
+
+export interface IDailyNotes {
+    extraNotes: string;
+    cookNotes: string;
+    clubNotes: string;
+    date: string | Date;
 }
 
 export interface IBahn {

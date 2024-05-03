@@ -29,7 +29,7 @@ const BottomBar = () => {
 
     return (
         <View
-            className={`bg-blue-300 ${keyboardStatus ? 'hidden' : 'flex'} items-center justify-center w-full h-[60px] absolute bottom-0`}
+            className={`bg-blue-300 ${keyboardStatus ? 'hidden' : 'flex'} -z-10 items-center justify-center w-full h-[60px] absolute bottom-0`}
         >
             <View className={`flex w-full flex-row justify-around`}>
                 <BottomButton onPress={openCalendar} name={'calendar'} size={30} />

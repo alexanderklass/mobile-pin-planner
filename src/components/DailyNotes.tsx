@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { View, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useEffect } from 'react';
+import { TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import CustomButton from './CustomButton';
 import { globalStore } from '../store/global.store';
-
-export interface IDailyNotes {
-    extraNotes: string;
-    cookNotes: string;
-    clubNotes: string;
-    date: string | Date;
-}
+import { emitToast } from '../utils/emitToast';
 
 const DailyNotes = () => {
-    const { date } = globalStore();
-    const [notesList, setNotesList] = useState<IDailyNotes[]>([]);
-    const [notes, setNotes] = useState<any>({});
+    const { date, setNotes, setNotesList, notes, notesList } = globalStore();
 
     const handleOnChange = (value: string, name: string) => {
         setNotes({ ...notes, [name]: value });
     };
 
     const handleSaveNotes = () => {
-        const newNoteList = notesList.filter((note: any) => note.date === date);
+        const newNoteList = notesList.filter((note) => note.date === date);
         if (newNoteList.length === 0) {
             const newNotes: any = {
                 date: date,
@@ -34,20 +26,21 @@ const DailyNotes = () => {
                 if (note.date === date) {
                     return {
                         ...note,
-                        extraNotes: note.extraNotes,
-                        cookNotes: note.cookNotes,
-                        clubNotes: note.clubNotes,
+                        extraNotes: notes.extraNotes,
+                        cookNotes: notes.cookNotes,
+                        clubNotes: notes.clubNotes,
                     };
                 }
                 return note;
             });
             setNotesList(customizedNotes);
         }
+        emitToast('success', 'Notizen gespeichert!');
     };
 
     const fetchNotes = () => {
         resetNotes();
-        const filteredByDate = notesList.filter((notes: IDailyNotes) => {
+        const filteredByDate = notesList.filter((notes) => {
             return notes.date === date;
         });
         if (filteredByDate.length === 0) return;
