@@ -3,15 +3,20 @@ import { View, Keyboard } from 'react-native';
 import { useEffect, useState } from 'react';
 import { globalStore } from '../store/global.store';
 const BottomBar = () => {
-    const { setCalendar, setBookingModal, setToggleSidebar } = globalStore();
+    const { setCalendar, setBookingModal, setToggleSidebar, setBookingData } = globalStore();
     const [keyboardStatus, setKeyboardStatus] = useState<boolean>(false);
 
     const openBooking = () => {
         setBookingModal(true);
+        resetBookingDataValues();
     };
 
     const openCalendar = () => {
         setCalendar(true);
+    };
+
+    const resetBookingDataValues = () => {
+        setBookingData({});
     };
 
     const openSidebar = () => {

@@ -12,15 +12,15 @@ export interface ICustomer {
 
 const Customer = ({ name, time, notes, onPress, color }: ICustomer) => {
     return (
-        <TouchableOpacity onPress={onPress} className={`${color} w-[395px] px-4 flex items-center flex-row my-1`}>
+        <TouchableOpacity onPress={onPress} className={`${color} w-[395px] px-4 flex py-2 items-center flex-row my-1`}>
             <View className={'pr-5'}>
                 <View className={'bg-black rounded-md'}>
                     <Icon color={'white'} size={40} name={'user'} />
                 </View>
             </View>
-            <View>
+            <View className={'w-[200px] gap-1'}>
                 <Text>{name}</Text>
-                <Text>{time}</Text>
+                <Text className={'bg-white rounded-md p-1 w-[120px]'}>{time}</Text>
                 <Text>{notes}</Text>
             </View>
         </TouchableOpacity>

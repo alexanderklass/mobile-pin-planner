@@ -53,7 +53,6 @@ const OptionsModal = () => {
         });
         setCustomerList(newList);
         emitToast('success', 'Buchung erfolgreich gelöscht!');
-        //deletedLaneToLocalStorage();
         setOptionsModal(false);
     };
 

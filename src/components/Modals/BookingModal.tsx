@@ -14,11 +14,6 @@ const BookingModal = () => {
 
     const closeBooking = () => {
         setBookingModal(false);
-        resetBookingData();
-    };
-
-    const resetBookingData = () => {
-        setBookingData({});
     };
 
     const handleFormOnChange = (value: string | number, name: string) => {
@@ -26,30 +21,21 @@ const BookingModal = () => {
         setBookingData({ ...bookingData, [name]: value });
     };
 
-    const selectTimeData = (list: any) => {
-        return list.map((item: any, index: number) => {
-            return { label: item, value: index, key: index };
-        });
-    };
-
-    const checkIfCanAddCustomer = () => {
-        const filteredList = customerList.filter((item: any) => {
+    const checkIfCanAddCustomer = (): boolean => {
+        const filteredList: object[] = customerList.filter((item: any) => {
             return (
                 item.date === date &&
-                item.startLane <= bookingData.startLane &&
-                item.endLane >= bookingData.endLane &&
-                item.startTime <= bookingData.startTime &&
-                item.endTime >= bookingData.endTime
+                item.startLane <= bookingData.endLane &&
+                item.endLane >= bookingData.startLane &&
+                item.startTime <= bookingData.endTime &&
+                item.endTime >= bookingData.startTime
             );
         });
         return filteredList.length > 0;
     };
 
     const addCustomer = () => {
-        if (checkIfCanAddCustomer()) {
-            emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
-            return;
-        }
+        if (checkIfCanAddCustomer()) return emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
         setCustomerList([
             ...customerList,
             { ...bookingData, date: date, customerColor: colorPicker(), uID: uuid.v4() },

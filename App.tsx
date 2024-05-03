@@ -4,10 +4,14 @@ import login from './src/screens/login';
 import planner from './src/screens/planner';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { setCustomText } from 'react-native-global-props';
+import * as Font from 'expo-font';
+const customFonts = { 'Inter-Regular': require('./assets/fonts/Inter-Regular.ttf') };
 
 export default function App() {
     const Stack = createStackNavigator();
+    const [isLoaded] = Font.useFonts(customFonts);
+    if (!isLoaded) return;
     return (
         <View className={'flex-1'}>
             <StatusBar hidden={true} style="auto" />
@@ -20,3 +24,9 @@ export default function App() {
         </View>
     );
 }
+const customTextProps = {
+    style: {
+        fontFamily: 'Inter-Regular',
+    },
+};
+setCustomText(customTextProps);
