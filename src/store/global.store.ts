@@ -22,6 +22,9 @@ export const globalStore = create<IGlobalStore>((set) => ({
     optionsData: [],
     setOptionsData: (data: any[]) => set({ optionsData: data }),
 
+    deleteModal: false,
+    setDeleteModal: (deleteModal) => set({ deleteModal: deleteModal }),
+
     toggleSidebar: false,
     setToggleSidebar: (toggle) => set({ toggleSidebar: toggle }),
     sidebarIndex: 0,

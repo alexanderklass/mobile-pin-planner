@@ -4,7 +4,7 @@ import { globalStore } from '../store/global.store';
 import { initLaneData, startTimeList } from '../init/initGridData';
 
 const Grid = () => {
-    const { gridData, setGridData, date, customerList, setOptionsData, setOptionsModal, optionsModal } = globalStore();
+    const { gridData, setGridData, date, customerList, setOptionsData, setOptionsModal } = globalStore();
     const time = startTimeList;
 
     const fetchCustomerList = () => {
@@ -93,10 +93,12 @@ const Grid = () => {
                                                 onPress={() => customerPressed(laneIndex, timeIndex)}
                                             >
                                                 {time.startLane === laneIndex && time.startTime === timeIndex && (
-                                                    <Text className={'text-center text-white'}>
+                                                    <Text className={'text-center'}>
                                                         {time.customerName.split('')[0]}
                                                     </Text>
                                                 )}
+
+                                                {}
                                             </Pressable>
                                         )}
                                     </View>

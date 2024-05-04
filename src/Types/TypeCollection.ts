@@ -19,6 +19,9 @@ export interface IGlobalStore {
     optionsData: any;
     setOptionsData: (optionsData: any) => void;
 
+    deleteModal: boolean;
+    setDeleteModal: (deleteModal: boolean) => void;
+
     toggleSidebar: boolean;
     setToggleSidebar: (toggle: boolean) => void;
     sidebarIndex: number;

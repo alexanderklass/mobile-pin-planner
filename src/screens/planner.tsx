@@ -8,6 +8,7 @@ import ToastMessage from '../components/ToastMessage';
 import OptionsModal from '../components/Modals/OptionsModal';
 import SideBar from '../components/SideBar';
 import SidebarContent from '../components/SidebarContent';
+import DeleteModal from '../components/Modals/DeleteModal';
 
 const Planner = () => {
     return (
@@ -16,6 +17,7 @@ const Planner = () => {
             <SidebarContent />
             <BookingModal />
             <OptionsModal />
+            <DeleteModal />
             <SideBar />
             <BottomBar />
             <DatePicker />

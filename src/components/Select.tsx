@@ -3,14 +3,13 @@ import RNPickerSelect from 'react-native-picker-select';
 import { startTimeList, endTimeList } from '../init/initGridData';
 
 export interface ISelect {
-    data?: any;
     onChange: (value: string | number) => void;
     value?: number;
     selectType?: string;
     timeType?: string;
 }
 
-const Select = ({ data, onChange, value, selectType, timeType }: ISelect) => {
+const Select = ({ onChange, value, selectType, timeType }: ISelect) => {
     const selectTimeData = () => {
         const startList = Array.from(startTimeList).map((item: string, index: number) => {
             return { label: item, value: index, key: index };
@@ -53,11 +52,15 @@ const Select = ({ data, onChange, value, selectType, timeType }: ISelect) => {
                     color: 'black',
                     backgroundColor: 'white',
                     width: 111,
+                    height: 50,
                     marginHorizontal: 5,
-                    textAlign: 'left',
+                    textAlign: 'center',
+                    borderRadius: 5,
                 },
             }}
+            useNativeAndroidPickerStyle={false}
             value={value}
+            placeholder={{ label: 'Wähle wert...', value: null }}
             items={handleData()}
             onValueChange={(value) => {
                 onChange(value);

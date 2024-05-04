@@ -7,8 +7,16 @@ import Select from '../Select';
 import { emitToast } from '../../utils/emitToast';
 
 const OptionsModal = () => {
-    const { optionsModal, setOptionsModal, optionsData, setOptionsData, customerList, setCustomerList, date } =
-        globalStore();
+    const {
+        optionsModal,
+        setOptionsModal,
+        optionsData,
+        setOptionsData,
+        customerList,
+        setCustomerList,
+        date,
+        setDeleteModal,
+    } = globalStore();
 
     const closeOptionsModal = () => {
         setOptionsModal(false);
@@ -46,13 +54,8 @@ const OptionsModal = () => {
         closeOptionsModal();
     };
 
-    const handleDeleteCustomer = () => {
-        const oldList = [...customerList];
-        const newList = oldList.filter((item: any) => {
-            return item.uID !== optionsData.uID && item.date === date;
-        });
-        setCustomerList(newList);
-        emitToast('success', 'Buchung erfolgreich gelöscht!');
+    const openDeleteModal = () => {
+        setDeleteModal(true);
         setOptionsModal(false);
     };
 
@@ -80,14 +83,14 @@ const OptionsModal = () => {
         <ModalLayout toggleWindow={optionsModal}>
             <Text>Options Modal</Text>
             <TextInput
-                className={'bg-blue-200 text-black border-red-500 border p-3'}
+                className={'bg-blue-200 rounded-md text-black p-3'}
                 value={optionsData.customerName}
                 readOnly={true}
                 onChangeText={(value) => handleOnChange(value, 'customerName')}
                 placeholder={'Kundennummer'}
             />
             <TextInput
-                className={'bg-blue-200 text-black border-red-500 border p-3'}
+                className={'bg-blue-200 rounded-md text-black p-3'}
                 readOnly={true}
                 value={optionsData.customerNumber}
                 onChangeText={(value) => handleOnChange(value, 'customerNumber')}
@@ -120,15 +123,18 @@ const OptionsModal = () => {
                 />
             </View>
             <TextInput
-                className={'bg-blue-200 text-black border-red-500 border p-3'}
+                className={'bg-blue-200 rounded-md text-black p-3'}
                 readOnly={true}
                 value={optionsData.workerName}
                 onChangeText={(value) => handleOnChange(value, 'workerName')}
                 placeholder={'Eingetragen von...'}
             />
             <TextInput
-                className={'bg-white p-3'}
+                className={'bg-white rounded-md p-3'}
                 value={optionsData.customerNotes}
+                multiline={true}
+                numberOfLines={3}
+                textAlignVertical={'top'}
                 onChangeText={(value) => handleOnChange(value, 'customerNotes')}
                 placeholder={'Notizen...'}
             />
@@ -139,7 +145,7 @@ const OptionsModal = () => {
                     onPress={handleAdjustCustomer}
                     text={'Adjust'}
                 />
-                <CustomButton style={'bg-red-500 border'} onPress={handleDeleteCustomer} text={'Delete'} />
+                <CustomButton style={'bg-red-500 border'} onPress={openDeleteModal} text={'Delete'} />
                 <CustomButton style={'bg-gray-500 border'} onPress={closeOptionsModal} text={'Cancel'} />
             </View>
         </ModalLayout>

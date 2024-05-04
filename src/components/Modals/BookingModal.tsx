@@ -38,7 +38,7 @@ const BookingModal = () => {
         if (checkIfCanAddCustomer()) return emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
         setCustomerList([
             ...customerList,
-            { ...bookingData, date: date, customerColor: colorPicker(), uID: uuid.v4() },
+            { ...bookingData, date: date, customerColor: colorPicker(), uID: uuid.v4(), payedStatus: false, price: 0 },
         ]);
         emitToast('success', 'Buchung erfolgreich hinzugefügt');
         closeBooking();
@@ -51,6 +51,10 @@ const BookingModal = () => {
             !bookingData.customerName ||
             !bookingData.customerNumber ||
             !bookingData.workerName ||
+            !bookingData.startLane ||
+            !bookingData.endLane ||
+            !bookingData.startTime ||
+            !bookingData.endTime ||
             laneGreater ||
             timeGreater
         );
@@ -62,12 +66,12 @@ const BookingModal = () => {
             <View className={'space-y-1'}>
                 <TextInput
                     onChangeText={(value) => handleFormOnChange(value, 'customerName')}
-                    className={'bg-white border-red-500 border p-3'}
-                    placeholder={'Name'}
+                    className={`bg-white ${!bookingData.customerName && 'bg-red-300'} rounded-md p-3`}
+                    placeholder={'Kundenname'}
                 />
                 <TextInput
                     onChangeText={(value) => handleFormOnChange(value, 'customerNumber')}
-                    className={'bg-white border-red-500 border p-3'}
+                    className={`bg-white ${!bookingData.customerNumber && 'bg-red-300'} rounded-md p-3`}
                     placeholder={'Telefonnummer'}
                 />
                 <View className={'flex flex-row justify-center items-center'}>
@@ -104,13 +108,16 @@ const BookingModal = () => {
 
                 <TextInput
                     onChangeText={(value) => handleFormOnChange(value, 'workerName')}
-                    className={'bg-white p-3'}
+                    className={`bg-white ${!bookingData.workerName && 'bg-red-300'} rounded-md p-3`}
                     placeholder={'Eingetragen von...'}
                 />
 
                 <TextInput
                     onChangeText={(value) => handleFormOnChange(value, 'customerNotes')}
-                    className={'bg-white p-3'}
+                    className={'bg-white p-3 rounded-md'}
+                    multiline={true}
+                    numberOfLines={3}
+                    textAlignVertical={'top'}
                     placeholder={'Notizen...'}
                 />
             </View>
