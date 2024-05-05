@@ -5,15 +5,16 @@ export interface IBottomButton {
     onPress?: () => void;
     name?: string;
     size?: number;
+    color?: string;
 }
 
-const BottomButton = ({ onPress, name = 'plus', size = 30 }: IBottomButton) => {
+const BottomButton = ({ onPress, name = 'plus', size = 30, color = 'bg-blue-500' }: IBottomButton) => {
     return (
         <TouchableOpacity
-            className={`rounded-md bg-blue-500 w-[60px] flex h-fit items-center justify-center`}
+            className={`rounded-md ${color} w-[60px] flex h-fit items-center justify-center`}
             onPress={onPress}
         >
-            <Icon color={'white'} name={name} size={size} />
+            <Icon color={'black'} name={name} size={size} />
         </TouchableOpacity>
     );
 };

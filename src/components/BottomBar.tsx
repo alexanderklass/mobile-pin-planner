@@ -9,6 +9,7 @@ const BottomBar = () => {
     const openBooking = () => {
         setBookingModal(true);
         resetBookingDataValues();
+        setBookingData({ startLane: 0, endLane: 11, startTime: 0, endTime: 21 });
     };
 
     const openCalendar = () => {
@@ -34,12 +35,12 @@ const BottomBar = () => {
 
     return (
         <View
-            className={`bg-blue-300 ${keyboardStatus ? 'hidden' : 'flex'} -z-10 items-center justify-center w-full h-[60px] absolute bottom-0`}
+            className={`bg-blue-500 ${keyboardStatus ? 'hidden' : 'flex'} -z-10 items-center justify-center w-full h-[60px] absolute bottom-0`}
         >
             <View className={`flex w-full flex-row justify-around`}>
-                <BottomButton onPress={openCalendar} name={'calendar'} size={30} />
-                <BottomButton onPress={openBooking} name={'plus'} size={50} />
-                <BottomButton onPress={openSidebar} name={'sidebar'} size={30} />
+                <BottomButton color={'bg-blue-200'} onPress={openCalendar} name={'calendar'} size={30} />
+                <BottomButton color={'bg-green-400'} onPress={openBooking} name={'plus'} size={50} />
+                <BottomButton color={'bg-blue-200'} onPress={openSidebar} name={'sidebar'} size={30} />
             </View>
         </View>
     );

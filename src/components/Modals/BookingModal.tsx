@@ -51,10 +51,6 @@ const BookingModal = () => {
             !bookingData.customerName ||
             !bookingData.customerNumber ||
             !bookingData.workerName ||
-            !bookingData.startLane ||
-            !bookingData.endLane ||
-            !bookingData.startTime ||
-            !bookingData.endTime ||
             laneGreater ||
             timeGreater
         );
@@ -62,7 +58,7 @@ const BookingModal = () => {
 
     return (
         <ModalLayout toggleWindow={bookingModal}>
-            <Text>BOOKING MODAL</Text>
+            <Text className={'font-bold'}>Kunden buchen</Text>
             <View className={'space-y-1'}>
                 <TextInput
                     onChangeText={(value) => handleFormOnChange(value, 'customerName')}
@@ -79,12 +75,14 @@ const BookingModal = () => {
                         onChange={(value) => {
                             handleFormOnChange(value, 'startLane');
                         }}
+                        value={bookingData.startLane}
                         selectType={'lane'}
                     />
                     <Select
                         onChange={(value) => {
                             handleFormOnChange(value, 'endLane');
                         }}
+                        value={bookingData.endLane}
                         selectType={'lane'}
                     />
                 </View>
@@ -96,6 +94,7 @@ const BookingModal = () => {
                         }}
                         selectType={'time'}
                         timeType={'startTime'}
+                        value={bookingData.startTime}
                     />
                     <Select
                         onChange={(value) => {
@@ -103,6 +102,7 @@ const BookingModal = () => {
                         }}
                         selectType={'time'}
                         timeType={'endTime'}
+                        value={bookingData.endTime}
                     />
                 </View>
 
@@ -121,16 +121,20 @@ const BookingModal = () => {
                     placeholder={'Notizen...'}
                 />
             </View>
-            <View className={'flex flex-row items-center justify-around'}>
+            <View className={'flex flex-row items-center justify-center'}>
                 <CustomButton
                     disabled={activeBookingButton()}
-                    style={'bg-green-500 border w-[90px] p-1'}
+                    style={'bg-green-500 w-[112px] mx-1'}
                     onPress={addCustomer}
-                    text={'Add'}
+                    icon={true}
+                    iconSize={25}
+                    iconName={'user-plus'}
                 ></CustomButton>
                 <CustomButton
-                    style={'bg-red-500 border w-[90px] p-1'}
-                    text={'Close'}
+                    style={'bg-gray-300 w-[112px] mx-1'}
+                    icon={true}
+                    iconSize={25}
+                    iconName={'x'}
                     onPress={closeBooking}
                 ></CustomButton>
             </View>

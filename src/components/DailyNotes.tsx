@@ -58,7 +58,7 @@ const DailyNotes = () => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex flex-col">
             <TextInput
-                className={'bg-gray-200 my-1 p-1 w-[390px]'}
+                className={'bg-blue-200 my-1 p-1 w-[390px]'}
                 placeholder={'Sonderbuchungen...'}
                 multiline={true}
                 numberOfLines={10}
@@ -69,7 +69,7 @@ const DailyNotes = () => {
                 }}
             />
             <TextInput
-                className={'bg-gray-200 p-1 my-1 w-[390px]'}
+                className={'bg-blue-200 p-1 my-1 w-[390px]'}
                 placeholder={'Koch...'}
                 multiline={true}
                 numberOfLines={10}
@@ -80,7 +80,7 @@ const DailyNotes = () => {
                 }}
             />
             <TextInput
-                className={'bg-gray-200 p-1 my-1 w-[390px]'}
+                className={'bg-blue-200 p-1 my-1 w-[390px]'}
                 placeholder={'Clubraum...'}
                 multiline={true}
                 numberOfLines={10}
@@ -90,7 +90,14 @@ const DailyNotes = () => {
                     handleOnChange(value, 'clubNotes');
                 }}
             />
-            <CustomButton onPress={handleSaveNotes} text={'SAFE'} style={'bg-green-500'} />
+            <CustomButton
+                icon={true}
+                iconName={'save'}
+                iconSize={20}
+                onPress={handleSaveNotes}
+                text={'SPEICHERN'}
+                style={'bg-green-500'}
+            />
         </KeyboardAvoidingView>
     );
 };

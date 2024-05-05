@@ -81,7 +81,7 @@ const OptionsModal = () => {
 
     return (
         <ModalLayout toggleWindow={optionsModal}>
-            <Text>Options Modal</Text>
+            <Text className={'font-bold'}>Kundenanpassung</Text>
             <TextInput
                 className={'bg-blue-200 rounded-md text-black p-3'}
                 value={optionsData.customerName}
@@ -138,15 +138,32 @@ const OptionsModal = () => {
                 onChangeText={(value) => handleOnChange(value, 'customerNotes')}
                 placeholder={'Notizen...'}
             />
-            <View className={'flex flex-row items-center justify-between'}>
+            <View className={'flex flex-row items-center w-full'}>
+                <View className={'flex flex-row'}>
+                    <CustomButton
+                        style={'bg-red-500'}
+                        onPress={openDeleteModal}
+                        icon={true}
+                        iconName={'trash'}
+                        iconSize={25}
+                    />
+                    <CustomButton style={'bg-yellow-500 mx-1'} icon={true} iconName={'dollar-sign'} iconSize={25} />
+                </View>
                 <CustomButton
-                    style={'bg-green-500 border'}
+                    style={'bg-green-500 w-[66px] mx-1'}
                     disabled={activateAdjustButton()}
                     onPress={handleAdjustCustomer}
-                    text={'Adjust'}
+                    icon={true}
+                    iconName={'user-check'}
+                    iconSize={25}
                 />
-                <CustomButton style={'bg-red-500 border'} onPress={openDeleteModal} text={'Delete'} />
-                <CustomButton style={'bg-gray-500 border'} onPress={closeOptionsModal} text={'Cancel'} />
+                <CustomButton
+                    style={'bg-gray-300 w-[66px]'}
+                    onPress={closeOptionsModal}
+                    icon={true}
+                    iconName={'x'}
+                    iconSize={25}
+                />
             </View>
         </ModalLayout>
     );

@@ -22,16 +22,26 @@ const DeleteModal = () => {
     };
 
     return (
-        <ModalLayout toggleWindow={deleteModal}>
+        <ModalLayout color={'bg-white border-2'} width={'w-auto'} toggleWindow={deleteModal}>
             <View className={'flex flex-row items-center justify-between'}>
-                <View className={'bg-red-500 p-1 rounded-md'}>
-                    <Icon name={'alert-triangle'} size={20} color="black" />
-                </View>
-                <Text className={'text-[17px] text-center'}>Buchung wirklich löschen?</Text>
+                <Icon name={'alert-triangle'} size={25} color="black" />
+                <Text className={'text-[18px] text-center'}>Buchung wirklich löschen?</Text>
             </View>
-            <View className={'flex flex-row items-center justify-around'}>
-                <CustomButton style={'bg-green-500 w-[110px]'} text="OK" onPress={handleDeleteCustomer} />
-                <CustomButton style={'bg-gray-200 w-[110px]'} text="CANCEL" onPress={closeDeleteModal} />
+            <View className={'flex flex-row items-center justify-center'}>
+                <CustomButton
+                    style={'bg-green-500 w-[110px] mx-1'}
+                    icon={true}
+                    iconName={'user-minus'}
+                    iconSize={25}
+                    onPress={handleDeleteCustomer}
+                />
+                <CustomButton
+                    style={'bg-gray-300 w-[110px] mx-1'}
+                    icon={true}
+                    iconSize={25}
+                    iconName={'x'}
+                    onPress={closeDeleteModal}
+                />
             </View>
         </ModalLayout>
     );

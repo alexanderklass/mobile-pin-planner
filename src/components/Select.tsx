@@ -58,9 +58,9 @@ const Select = ({ onChange, value, selectType, timeType }: ISelect) => {
                     borderRadius: 5,
                 },
             }}
+            placeholder={{}}
             useNativeAndroidPickerStyle={false}
             value={value}
-            placeholder={{ label: 'Wähle wert...', value: null }}
             items={handleData()}
             onValueChange={(value) => {
                 onChange(value);

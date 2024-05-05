@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import CustomButton from './CustomButton';
 import { globalStore } from '../store/global.store';
 const SideBar = () => {
@@ -23,16 +23,28 @@ const SideBar = () => {
                             onPress={() => handleSidebarButton(0)}
                             style={'bg-green-300 w-full m-1 rounded-md'}
                             text={'Planner'}
+                            icon={true}
+                            textStyle={'text-xl'}
+                            iconSize={20}
+                            iconName={'calendar'}
                         />
                         <CustomButton
                             onPress={() => handleSidebarButton(1)}
                             style={'bg-purple-300 w-full m-1 rounded-md'}
                             text={'Kunden'}
+                            icon={true}
+                            textStyle={'text-xl'}
+                            iconSize={20}
+                            iconName={'user'}
                         />
                         <CustomButton
                             onPress={() => handleSidebarButton(2)}
                             style={'bg-yellow-300 w-full m-1 rounded-md'}
                             text={'Notizen'}
+                            icon={true}
+                            textStyle={'text-xl'}
+                            iconSize={20}
+                            iconName={'book'}
                         />
                     </View>
                 </View>
