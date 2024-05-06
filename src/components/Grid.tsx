@@ -46,7 +46,7 @@ const Grid = () => {
     const LaneGrid = () => {
         return (
             <View className={'flex flex-row'}>
-                <View className={'w-[40px] items-center border border-gray-600 bg-blue-200'}>
+                <View className={'items-center border border-gray-600 bg-blue-200'}>
                     <Image
                         className={'rounded-full bg-blue-200 w-[35px] h-[30px]'}
                         source={require('../assets/grid-logo.png')}
@@ -56,7 +56,7 @@ const Grid = () => {
                     return (
                         <Text
                             key={index}
-                            className={`text-xl w-[27px] text-center border border-gray-600 bg-gray-200 ${index % 4 === 2 && 'bg-blue-200'} ${index % 4 === 3 && 'bg-blue-200'} `}
+                            className={`text-xl min-w-[27px] flex-grow text-center border border-gray-600 bg-gray-200 ${index % 4 === 2 && 'bg-blue-200'} ${index % 4 === 3 && 'bg-blue-200'} `}
                         >
                             {index + 1}
                         </Text>
@@ -73,7 +73,7 @@ const Grid = () => {
                     return (
                         <Text
                             key={index}
-                            className={`h-[25px] text-center w-[40px] border border-gray-600 bg-gray-200 ${index % 4 === 2 && 'bg-blue-200'} ${index % 4 === 3 && 'bg-blue-200'} `}
+                            className={`h-[25px] text-center border border-gray-600 bg-gray-200 ${index % 4 === 2 && 'bg-blue-200'} ${index % 4 === 3 && 'bg-blue-200'} `}
                         >
                             {time}
                         </Text>
@@ -85,19 +85,19 @@ const Grid = () => {
 
     const CustomerGrid = () => {
         return (
-            <View className={'flex flex-row'}>
+            <View className={'flex flex-row flex-grow'}>
                 {gridData.map((lane, laneIndex) => {
                     return (
-                        <View key={laneIndex} className={'flex h-full flex-col'}>
+                        <View key={laneIndex} className={'flex flex-col flex-grow'}>
                             {lane.time.map((time, timeIndex) => {
                                 return (
                                     <View
                                         key={timeIndex}
-                                        className={`${time.customerColor ? time.customerColor : 'bg-gray-200'} border border-black w-[27px] h-[25px]`}
+                                        className={`${time.customerColor ? time.customerColor : 'bg-gray-200'} min-w-[27px] h-[25px] border border-black`}
                                     >
                                         {time.customerName && (
                                             <Pressable
-                                                className={'w-full h-full relative'}
+                                                className={'relative w-full h-full'}
                                                 onPress={() => customerPressed(laneIndex, timeIndex)}
                                             >
                                                 {time.startLane === laneIndex && time.startTime === timeIndex && (
@@ -133,7 +133,7 @@ const Grid = () => {
     }, [date, customerList]);
 
     return (
-        <View className={'flex flex-col'}>
+        <View className={'flex flex-col items-center'}>
             <LaneGrid />
             <View className={'flex flex-row'}>
                 <TimeGrid />

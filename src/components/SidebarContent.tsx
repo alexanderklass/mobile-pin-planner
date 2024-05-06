@@ -17,7 +17,7 @@ const SidebarContent = () => {
             page: <DailyNotes />,
         },
     ];
-    return <View>{content[sidebarIndex].page}</View>;
+    return <View className={'my-auto w-full'}>{content[sidebarIndex].page}</View>;
 };
 
 export default SidebarContent;

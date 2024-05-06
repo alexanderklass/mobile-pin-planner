@@ -10,7 +10,7 @@ export interface IModalLayout {
 
 const ModalLayout = ({ toggleWindow, children, color = 'bg-blue-500', width = 'w-[250px]' }: IModalLayout) => {
     return (
-        <View className={'absolute'}>
+        <View className={'absolute h-full w-full items-center justify-center'}>
             {toggleWindow && (
                 <View className={`${color} rounded-md ${width} flex border-2 p-2`}>
                     <View className={'flex flex-col justify-center gap-2'}>{children}</View>

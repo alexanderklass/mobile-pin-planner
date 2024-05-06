@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { globalStore } from '../store/global.store';
 import Customer from './Customer';
 import { switchIndexToTime } from '../utils/timeIndexConverter';
@@ -16,9 +16,12 @@ const CustomerHistory = () => {
         setOptionsModal(true);
     };
 
+    const screenHeight = Dimensions.get('window').height;
+    const scrollViewHeight = screenHeight * 0.8;
+
     return (
-        <ScrollView className={'max-h-[650px]'}>
-            <View className={''}>
+        <ScrollView style={{ maxHeight: scrollViewHeight }}>
+            <View>
                 {filteredCustomer.map((customer: any, index: number) => {
                     const startTime = switchIndexToTime(customer.startTime);
                     const endTime = switchIndexToTime(customer.endTime + 1);
