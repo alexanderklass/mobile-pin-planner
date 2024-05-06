@@ -14,8 +14,8 @@ const Customer = ({ name, time, notes, onPress, color }: ICustomer) => {
     return (
         <TouchableOpacity onPress={onPress} className={`${color} w-[395px] px-4 flex py-2 items-center flex-row my-1`}>
             <View className={'pr-5'}>
-                <View className={'bg-black rounded-md'}>
-                    <Icon color={'white'} size={40} name={'user'} />
+                <View className={'bg-white border rounded-md'}>
+                    <Icon color={'black'} size={40} name={'user'} />
                 </View>
             </View>
             <View className={'w-[200px] gap-1'}>

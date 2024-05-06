@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import { globalStore } from '../store/global.store';
 import { initLaneData, startTimeList } from '../init/initGridData';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Grid = () => {
     const { gridData, setGridData, date, customerList, setOptionsData, setOptionsModal } = globalStore();
@@ -30,7 +31,6 @@ const Grid = () => {
                         endTime: item.endTime,
                         customerColor: item.customerColor,
                         payedStatus: item.payedStatus,
-                        price: 0,
                     };
                 }
             }
@@ -46,10 +46,18 @@ const Grid = () => {
     const LaneGrid = () => {
         return (
             <View className={'flex flex-row'}>
-                <Text className={'w-[40px] border border-gray-600 bg-gray-300'}></Text>
+                <View className={'w-[40px] items-center border border-gray-600 bg-blue-200'}>
+                    <Image
+                        className={'rounded-full bg-blue-200 w-[35px] h-[30px]'}
+                        source={require('../assets/grid-logo.png')}
+                    />
+                </View>
                 {Array.from({ length: 12 }, (time, index) => {
                     return (
-                        <Text key={index} className={'text-xl w-[27px] text-center border border-gray-600 bg-gray-200'}>
+                        <Text
+                            key={index}
+                            className={`text-xl w-[27px] text-center border border-gray-600 bg-gray-200 ${index % 4 === 2 && 'bg-blue-200'} ${index % 4 === 3 && 'bg-blue-200'} `}
+                        >
                             {index + 1}
                         </Text>
                     );
@@ -65,7 +73,7 @@ const Grid = () => {
                     return (
                         <Text
                             key={index}
-                            className={'h-[25px] text-center w-[40px] border border-gray-600 bg-gray-200'}
+                            className={`h-[25px] text-center w-[40px] border border-gray-600 bg-gray-200 ${index % 4 === 2 && 'bg-blue-200'} ${index % 4 === 3 && 'bg-blue-200'} `}
                         >
                             {time}
                         </Text>
@@ -85,11 +93,11 @@ const Grid = () => {
                                 return (
                                     <View
                                         key={timeIndex}
-                                        className={`${time.customerColor ? time.customerColor : 'bg-gray-200'} border border-gray-600 w-[27px] h-[25px]`}
+                                        className={`${time.customerColor ? time.customerColor : 'bg-gray-200'} border border-black w-[27px] h-[25px]`}
                                     >
                                         {time.customerName && (
                                             <Pressable
-                                                className={'w-full h-full'}
+                                                className={'w-full h-full relative'}
                                                 onPress={() => customerPressed(laneIndex, timeIndex)}
                                             >
                                                 {time.startLane === laneIndex && time.startTime === timeIndex && (
@@ -98,7 +106,16 @@ const Grid = () => {
                                                     </Text>
                                                 )}
 
-                                                {}
+                                                {time.payedStatus && (
+                                                    <View className={'absolute top-0 right-0 rounded-md bg-black'}>
+                                                        <Icon
+                                                            className={'text-center'}
+                                                            name={'dollar-sign'}
+                                                            color={'white'}
+                                                            size={10}
+                                                        />
+                                                    </View>
+                                                )}
                                             </Pressable>
                                         )}
                                     </View>

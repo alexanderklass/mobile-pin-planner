@@ -4,10 +4,10 @@
     "slug": "mobile-pin-planner",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,16 +19,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "",
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.mobilepinplanner"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": ""
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0ab1b9f0-f8b0-42a4-91da-6abdc895be3f"
+      }
+    }
   }
 }

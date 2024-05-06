@@ -66,5 +66,4 @@ export interface ITime {
     startTime: number;
     endTime: number;
     payedStatus: boolean;
-    price: number;
 }

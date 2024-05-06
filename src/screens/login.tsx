@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Image, Pressable, Text, TextInput, View } from 'react-native';
 import { globalStore } from '../store/global.store';
 

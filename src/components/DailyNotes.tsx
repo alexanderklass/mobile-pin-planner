@@ -95,7 +95,7 @@ const DailyNotes = () => {
                 iconName={'save'}
                 iconSize={20}
                 onPress={handleSaveNotes}
-                text={'SPEICHERN'}
+                text={'Speichern'}
                 style={'bg-green-500'}
             />
         </KeyboardAvoidingView>

@@ -5,6 +5,7 @@ import { Text, TextInput, View } from 'react-native';
 import CustomButton from '../CustomButton';
 import Select from '../Select';
 import { emitToast } from '../../utils/emitToast';
+import customer from '../Customer';
 
 const OptionsModal = () => {
     const {
@@ -28,6 +29,21 @@ const OptionsModal = () => {
             ...optionsData,
             [name]: value,
         });
+    };
+
+    const handleCustomerPayed = () => {
+        const oldList = [...customerList];
+        const newList = oldList.map((customer: any) => {
+            if (customer.uID === optionsData.uID && customer.date === optionsData.date) {
+                return {
+                    ...customer,
+                    payedStatus: !customer.payedStatus,
+                };
+            }
+            return customer;
+        });
+        setCustomerList(newList);
+        closeOptionsModal();
     };
 
     const handleAdjustCustomer = () => {
@@ -147,7 +163,13 @@ const OptionsModal = () => {
                         iconName={'trash'}
                         iconSize={25}
                     />
-                    <CustomButton style={'bg-yellow-500 mx-1'} icon={true} iconName={'dollar-sign'} iconSize={25} />
+                    <CustomButton
+                        style={'bg-yellow-500 mx-1'}
+                        onPress={handleCustomerPayed}
+                        icon={true}
+                        iconName={'dollar-sign'}
+                        iconSize={25}
+                    />
                 </View>
                 <CustomButton
                     style={'bg-green-500 w-[66px] mx-1'}

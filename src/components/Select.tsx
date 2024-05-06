@@ -51,6 +51,7 @@ const Select = ({ onChange, value, selectType, timeType }: ISelect) => {
                 inputAndroid: {
                     color: 'black',
                     backgroundColor: 'white',
+                    fontSize: 15,
                     width: 111,
                     height: 50,
                     marginHorizontal: 5,

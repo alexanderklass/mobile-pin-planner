@@ -23,7 +23,6 @@ export const initLaneData = (laneGrids: number) => {
                 startTime: 0,
                 endTime: 0,
                 payedStatus: false,
-                price: 0,
             };
             bahn.time.push(time);
         }

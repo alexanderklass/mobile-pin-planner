@@ -38,7 +38,7 @@ const BookingModal = () => {
         if (checkIfCanAddCustomer()) return emitToast('error', 'Es existiert schon ein Kunde für diese Werte');
         setCustomerList([
             ...customerList,
-            { ...bookingData, date: date, customerColor: colorPicker(), uID: uuid.v4(), payedStatus: false, price: 0 },
+            { ...bookingData, date: date, customerColor: colorPicker(), uID: uuid.v4(), payedStatus: false },
         ]);
         emitToast('success', 'Buchung erfolgreich hinzugefügt');
         closeBooking();
