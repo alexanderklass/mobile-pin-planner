@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions, Text } from 'react-native';
 import { globalStore } from '../store/global.store';
 import Customer from './Customer';
 import { switchIndexToTime } from '../utils/timeIndexConverter';
@@ -21,23 +21,26 @@ const CustomerHistory = () => {
 
     return (
         <ScrollView style={{ maxHeight: scrollViewHeight }}>
-            <View>
-                {filteredCustomer.map((customer: any, index: number) => {
-                    const startTime = switchIndexToTime(customer.startTime);
-                    const endTime = switchIndexToTime(customer.endTime + 1);
-                    const fullTime = `${startTime} - ${endTime} Uhr`;
-                    return (
-                        <Customer
-                            key={index}
-                            onPress={() => handleCustomerClicked(customer.startLane, customer.startTime)}
-                            color={customer.customerColor}
-                            name={customer.customerName}
-                            notes={customer.customerNotes}
-                            time={fullTime}
-                        />
-                    );
-                })}
-            </View>
+            {filteredCustomer.length === 0 && (
+                <View className={'flex items-center justify-center'}>
+                    <Text>Aktuell sind keine Kunden eingetragen...</Text>
+                </View>
+            )}
+            {filteredCustomer.map((customer: any, index: number) => {
+                const startTime = switchIndexToTime(customer.startTime);
+                const endTime = switchIndexToTime(customer.endTime + 1);
+                const fullTime = `${startTime} - ${endTime} Uhr`;
+                return (
+                    <Customer
+                        key={index}
+                        onPress={() => handleCustomerClicked(customer.startLane, customer.startTime)}
+                        color={customer.customerColor}
+                        name={customer.customerName}
+                        notes={customer.customerNotes}
+                        time={fullTime}
+                    />
+                );
+            })}
         </ScrollView>
     );
 };

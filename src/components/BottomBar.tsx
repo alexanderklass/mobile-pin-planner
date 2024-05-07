@@ -38,9 +38,27 @@ const BottomBar = () => {
             className={`bg-blue-500 ${keyboardStatus ? 'hidden' : 'flex'} -z-10 items-center justify-center w-full h-[60px] absolute bottom-0`}
         >
             <View className={`flex w-full flex-row justify-around`}>
-                <BottomButton color={'bg-blue-200'} onPress={openCalendar} name={'calendar'} size={30} />
-                <BottomButton color={'bg-green-400'} onPress={openBooking} name={'plus'} size={50} />
-                <BottomButton color={'bg-blue-200'} onPress={openSidebar} name={'sidebar'} size={30} />
+                <BottomButton
+                    width={'w-[70px]'}
+                    color={'bg-blue-200'}
+                    onPress={openCalendar}
+                    name={'calendar'}
+                    size={30}
+                />
+                <BottomButton
+                    width={'w-[100px]'}
+                    color={'bg-green-400'}
+                    onPress={openBooking}
+                    name={'plus'}
+                    size={50}
+                />
+                <BottomButton
+                    width={'w-[70px]'}
+                    color={'bg-blue-200'}
+                    onPress={openSidebar}
+                    name={'sidebar'}
+                    size={30}
+                />
             </View>
         </View>
     );
