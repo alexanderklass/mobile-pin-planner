@@ -19,8 +19,8 @@ const Customer = ({ name, time, notes, onPress, color }: ICustomer) => {
                 </View>
             </View>
             <View className={'space-y-0.5 flex'}>
-                {name && <Text className={'bg-white opacity-80 rounded-md p-1'}>{name}</Text>}
-                {time && <Text className={'bg-white opacity-80 rounded-md p-1'}>{time}</Text>}
+                <Text className={'bg-white opacity-80 rounded-md p-1'}>{name}</Text>
+                <Text className={'bg-white opacity-80 rounded-md p-1'}>{time}</Text>
                 {notes && <Text className={'bg-white opacity-80 max-w-[250px] p-1 rounded-md'}>{notes}</Text>}
             </View>
         </TouchableOpacity>

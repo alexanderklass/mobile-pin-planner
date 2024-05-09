@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import CustomButton from './CustomButton';
+import SearchBar from './SearchBar';
 import { globalStore } from '../store/global.store';
 const SideBar = () => {
     const { toggleSidebar, setToggleSidebar, setSidebarIndex } = globalStore();
@@ -46,6 +47,7 @@ const SideBar = () => {
                             iconSize={20}
                             iconName={'book'}
                         />
+                        <SearchBar />
                     </View>
                 </View>
             )}

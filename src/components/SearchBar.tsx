@@ -1,0 +1,62 @@
+import React, { useState } from 'react';
+import { TextInput, View } from 'react-native';
+import SearchContent from './SearchContent';
+import Icon from 'react-native-vector-icons/Feather';
+import { globalStore } from '../store/global.store';
+import { ITime } from '../Types/TypeCollection';
+const SearchBar = () => {
+    const { customerList } = globalStore();
+    const [searchList, setSearchList] = useState<ITime[]>([]);
+    const [searchInput, setSearchInput] = useState('');
+    const [searchFocus, setSearchFocus] = useState(false);
+
+    const filterSearch = (value: string) => {
+        setSearchInput(value);
+        const oldList = [...customerList];
+        const newList = oldList.filter((customer) => {
+            return customer.customerName.toLowerCase().includes(searchInput.toLowerCase());
+        });
+        setSearchList(newList);
+    };
+
+    const handleContentClick = (customer: ITime) => {
+        console.log(customer);
+    };
+
+    return (
+        <View className={'w-full mt-1'}>
+            <View className={'justify-center relative flex items-center'}>
+                <View className={'absolute top-3 right-2 z-10'}>
+                    <Icon name={'search'} size={20} />
+                </View>
+                <TextInput
+                    onFocus={() => setSearchFocus(true)}
+                    onBlur={() => setSearchFocus(false)}
+                    onChangeText={(value) => {
+                        filterSearch(value);
+                    }}
+                    className={`bg-white w-full ${searchFocus && searchInput !== '' && searchList.length > 0 ? 'rounded-t-md' : 'rounded-md'} p-2`}
+                    placeholder={'Kunden suchen...'}
+                />
+            </View>
+            <View
+                className={`w-full rounded-b-md ${searchList.length > 0 && searchInput !== '' ? 'p-2' : 'p-0'} bg-white`}
+            >
+                {searchList.length > 0 &&
+                    searchInput !== '' &&
+                    searchList.map((customer: ITime, index: number) => {
+                        return (
+                            <SearchContent
+                                key={index}
+                                onPress={() => handleContentClick(customer)}
+                                name={customer.customerName}
+                                date={customer.date}
+                            />
+                        );
+                    })}
+            </View>
+        </View>
+    );
+};
+
+export default SearchBar;

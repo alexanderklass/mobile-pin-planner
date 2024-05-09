@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { weekDays } from '../init/initGridData';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { globalStore } from '../store/global.store';
-import { View, Text } from 'react-native';
 
 const DatePicker = () => {
     const { setDate, calendar, setCalendar, date, setCurrenWeekDay } = globalStore();
@@ -40,17 +38,13 @@ const DatePicker = () => {
     }, []);
 
     return (
-        <Text>
-            {calendar && (
-                <DateTimePickerModal
-                    mode="date"
-                    isVisible={calendar}
-                    onHide={closeCalendar}
-                    onCancel={closeCalendar}
-                    onConfirm={(date) => handleConfirm(date)}
-                />
-            )}
-        </Text>
+        <DateTimePickerModal
+            mode="date"
+            isVisible={calendar}
+            onHide={closeCalendar}
+            onCancel={closeCalendar}
+            onConfirm={(date) => handleConfirm(date)}
+        />
     );
 };
 
