@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { globalStore } from '../store/global.store';
 import { ITime } from '../Types/TypeCollection';
 const SearchBar = () => {
-    const { customerList } = globalStore();
+    const { customerList, setUniversalDate, setSidebarIndex, setToggleSidebar } = globalStore();
     const [searchList, setSearchList] = useState<ITime[]>([]);
     const [searchInput, setSearchInput] = useState('');
     const [searchFocus, setSearchFocus] = useState(false);
@@ -20,7 +20,19 @@ const SearchBar = () => {
     };
 
     const handleContentClick = (customer: ITime) => {
-        console.log(customer);
+        const date = customer.date;
+        const [day, month, year] = date.split('.');
+        const jsDate = new Date(`${year}-${month}-${day}`);
+        const isoString = jsDate.toISOString();
+        const newDateObj = new Date(isoString);
+        setUniversalDate(newDateObj);
+        resetInput();
+    };
+
+    const resetInput = () => {
+        setSearchInput('');
+        setSidebarIndex(0);
+        setToggleSidebar(false);
     };
 
     return (

@@ -2,6 +2,8 @@ export interface IGlobalStore {
     loginData: any;
     setLoginData: (user: any) => void;
 
+    universalDate: Date;
+    setUniversalDate: (newDate: Date) => void;
     date: Date | string;
     setDate: (newDate: Date | string) => void;
     calendar: boolean;

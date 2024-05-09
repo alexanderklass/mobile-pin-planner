@@ -3,39 +3,37 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { globalStore } from '../store/global.store';
 
 const DatePicker = () => {
-    const { setDate, calendar, setCalendar, date, setCurrenWeekDay } = globalStore();
+    const { setDate, calendar, setCalendar, setCurrenWeekDay, setUniversalDate, universalDate } = globalStore();
 
     const closeCalendar = () => {
         setCalendar(false);
     };
 
-    const getFullDate = (newDate: Date = new Date()) => {
-        let day = newDate.getDate().toString();
-        let month = (newDate.getMonth() + 1).toString();
-        const year = newDate.getFullYear();
+    const getFullDate = () => {
+        let day = universalDate.getDate().toString();
+        let month = (universalDate.getMonth() + 1).toString();
+        const year = universalDate.getFullYear();
         day = day.padStart(2, '0');
         month = month.padStart(2, '0');
         setDate(`${day}.${month}.${year}`);
     };
 
-    const getWeekDay = (dateTime: Date = new Date()) => {
-        setCurrenWeekDay(new Date(dateTime).toLocaleDateString('de-DE', { weekday: 'long' }));
+    const getWeekDay = () => {
+        setCurrenWeekDay(universalDate.toLocaleDateString('de-DE', { weekday: 'long' }));
     };
 
     const handleConfirm = (dateTime: Date) => {
-        getFullDate(dateTime);
-        getWeekDay(dateTime);
-        setCalendar(false);
+        setUniversalDate(dateTime);
     };
 
-    const handleStartUp = () => {
+    const handleUpdateDate = () => {
         getWeekDay();
         getFullDate();
     };
 
     useEffect(() => {
-        handleStartUp();
-    }, []);
+        handleUpdateDate();
+    }, [universalDate]);
 
     return (
         <DateTimePickerModal
@@ -43,6 +41,7 @@ const DatePicker = () => {
             isVisible={calendar}
             onHide={closeCalendar}
             onCancel={closeCalendar}
+            date={universalDate}
             onConfirm={(date) => handleConfirm(date)}
         />
     );

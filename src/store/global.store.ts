@@ -5,6 +5,8 @@ export const globalStore = create<IGlobalStore>((set) => ({
     loginData: {},
     setLoginData: (user: any) => set({ loginData: user }),
 
+    universalDate: new Date(),
+    setUniversalDate: (newDate) => set({ universalDate: newDate }),
     date: new Date(),
     setDate: (newDate) => set({ date: newDate }),
     calendar: false,
