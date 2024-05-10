@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
-import { TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { TextInput, KeyboardAvoidingView, Platform, View, Text } from 'react-native';
 import CustomButton from './CustomButton';
 import { globalStore } from '../store/global.store';
 import { emitToast } from '../utils/emitToast';
+import { IDailyNotes } from '../Types/TypeCollection';
 
 const DailyNotes = () => {
     const { date, setNotes, setNotesList, notes, notesList } = globalStore();
+    const [prevNotes, setPrevNotes] = useState<IDailyNotes[]>();
+    const [saveNotesWarning, setSaveNotesWarning] = useState(false);
 
     const handleOnChange = (value: string, name: string) => {
         setNotes({ ...notes, [name]: value });
+        if (prevNotes !== notes) setSaveNotesWarning(true);
     };
 
     const handleSaveNotes = () => {
@@ -36,6 +40,7 @@ const DailyNotes = () => {
             setNotesList(customizedNotes);
         }
         emitToast('success', 'Notizen gespeichert!');
+        setSaveNotesWarning(false);
     };
 
     const fetchNotes = () => {
@@ -44,11 +49,13 @@ const DailyNotes = () => {
             return notes.date === date;
         });
         if (filteredByDate.length === 0) return;
+        setPrevNotes(filteredByDate);
         setNotes(filteredByDate[0]);
     };
 
     const resetNotes = () => {
         setNotes({});
+        setSaveNotesWarning(false);
     };
 
     useEffect(() => {
@@ -56,12 +63,18 @@ const DailyNotes = () => {
     }, [date]);
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex flex-col">
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex flex-col relative"
+        >
+            <View className={`${!saveNotesWarning && 'hidden'} p-2 bg-red-300`}>
+                <Text className={'text-center'}>Nicht gespeicherte Werte vorhanden!</Text>
+            </View>
             <TextInput
                 className={'bg-blue-200 my-1 p-1'}
                 placeholder={'Sonderbuchungen...'}
                 multiline={true}
-                numberOfLines={10}
+                numberOfLines={8}
                 textAlignVertical={'top'}
                 value={notes.extraNotes}
                 onChangeText={(value: string) => {
@@ -72,7 +85,7 @@ const DailyNotes = () => {
                 className={'bg-blue-200 p-1 my-1'}
                 placeholder={'Koch...'}
                 multiline={true}
-                numberOfLines={10}
+                numberOfLines={8}
                 textAlignVertical={'top'}
                 value={notes.cookNotes}
                 onChangeText={(value: string) => {
@@ -83,7 +96,7 @@ const DailyNotes = () => {
                 className={'bg-blue-200 p-1 my-1'}
                 placeholder={'Clubraum...'}
                 multiline={true}
-                numberOfLines={10}
+                numberOfLines={8}
                 textAlignVertical={'top'}
                 value={notes.clubNotes}
                 onChangeText={(value: string) => {
