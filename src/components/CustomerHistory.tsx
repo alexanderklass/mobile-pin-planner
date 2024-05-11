@@ -22,7 +22,7 @@ const CustomerHistory = () => {
     return (
         <ScrollView style={{ maxHeight: scrollViewHeight }}>
             {filteredCustomer.length === 0 && (
-                <View className={'flex items-center justify-center'}>
+                <View className={'flex bg-white p-2 rounded-lg mx-3 items-center justify-center'}>
                     <Text>Aktuell sind keine Kunden eingetragen...</Text>
                 </View>
             )}

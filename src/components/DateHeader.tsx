@@ -5,7 +5,7 @@ import Timer from './Timer';
 const DateHeader = () => {
     const { date, currentWeekDay } = globalStore();
     return (
-        <View className={'flex items-center justify-center w-full absolute top-0 p-3 bg-blue-500'}>
+        <View className={'flex items-center justify-center w-full absolute top-0 p-3 bg-blue-400'}>
             <View className={'flex flex-row'}>
                 <Text className={'text-xl bg-blue-100 rounded-md p-0.5 mx-0.5'}>{currentWeekDay.toString()}</Text>
                 <Text className={'text-xl bg-yellow-200 rounded-md p-0.5 mx-0.5'}>{date.toString()}</Text>

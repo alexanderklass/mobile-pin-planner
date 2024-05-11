@@ -65,13 +65,13 @@ const DailyNotes = () => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            className="flex flex-col relative"
+            className="flex mx-3 flex-col relative"
         >
-            <View className={`${!saveNotesWarning && 'hidden'} p-2 bg-red-300`}>
+            <View className={`${!saveNotesWarning && 'hidden'} p-2 rounded-md bg-red-300`}>
                 <Text className={'text-center'}>Nicht gespeicherte Werte vorhanden!</Text>
             </View>
             <TextInput
-                className={'bg-blue-200 my-1 p-1'}
+                className={'bg-blue-200 rounded-md my-1 p-1'}
                 placeholder={'Sonderbuchungen...'}
                 multiline={true}
                 numberOfLines={8}
@@ -82,7 +82,7 @@ const DailyNotes = () => {
                 }}
             />
             <TextInput
-                className={'bg-blue-200 p-1 my-1'}
+                className={'bg-blue-200 rounded-md p-1 my-1'}
                 placeholder={'Koch...'}
                 multiline={true}
                 numberOfLines={8}
@@ -93,7 +93,7 @@ const DailyNotes = () => {
                 }}
             />
             <TextInput
-                className={'bg-blue-200 p-1 my-1'}
+                className={'bg-blue-200 rounded-md p-1 my-1'}
                 placeholder={'Clubraum...'}
                 multiline={true}
                 numberOfLines={8}

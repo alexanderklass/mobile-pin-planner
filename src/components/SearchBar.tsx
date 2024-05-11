@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { TextInput, View, ScrollView } from 'react-native';
 import SearchContent from './SearchContent';
 import Icon from 'react-native-vector-icons/Feather';
 import { globalStore } from '../store/global.store';
@@ -51,7 +51,8 @@ const SearchBar = () => {
                     placeholder={'Kunden suchen...'}
                 />
             </View>
-            <View
+            <ScrollView
+                style={{ maxHeight: 200 }}
                 className={`w-full rounded-b-md ${searchList.length > 0 && searchInput !== '' ? 'p-2' : 'p-0'} bg-white`}
             >
                 {searchList.length > 0 &&
@@ -66,7 +67,7 @@ const SearchBar = () => {
                             />
                         );
                     })}
-            </View>
+            </ScrollView>
         </View>
     );
 };

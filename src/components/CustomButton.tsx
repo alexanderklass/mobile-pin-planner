@@ -28,7 +28,7 @@ const CustomButton = ({
     return (
         <TouchableOpacity
             disabled={disabled}
-            className={`${style} ${disabled && 'bg-gray-200'} p-2 flex-row space-x-1 transition-all rounded-md flex items-center justify-center`}
+            className={`${style} ${disabled && 'bg-gray-200'} shadow-black shadow-2xl p-2 flex-row space-x-1 transition-all rounded-md flex items-center justify-center`}
             onPress={onPress}
         >
             {icon && <Icon name={iconName} size={iconSize} color={iconColor} />}

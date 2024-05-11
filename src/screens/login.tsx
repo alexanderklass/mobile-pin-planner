@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Pressable, Text, TextInput, View } from 'react-native';
 import { globalStore } from '../store/global.store';
+import BackgroundImage from '../components/BackgroundImage';
 
 const Login = ({ navigation }: any) => {
     const { loginData, setLoginData } = globalStore();
@@ -13,7 +14,8 @@ const Login = ({ navigation }: any) => {
     };
 
     return (
-        <View className={'flex-1 items-center gap-4 justify-center bg-blue-500'}>
+        <View className={'flex-1 relative items-center gap-4 justify-center'}>
+            <BackgroundImage />
             <View className={'flex items-center gap-2 justify-center'}>
                 <Image
                     className={'w-[200px] h-[200px] rounded-full bg-blue-200'}
