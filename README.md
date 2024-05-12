@@ -13,17 +13,27 @@ It's recommended to use something like `socket.io` to allow the use of multiple 
 - `Typescript`
 
 ## Adding booking
+![adding](https://i.imgur.com/HgTxax2.gif)\
 
+## Swapping days
+![swapping_days](https://i.imgur.com/H8mfLjB.gif)\
 
 ## Deleting booking
-
+![deleting_booking](https://i.imgur.com/NI4zF2A.gif)\
 
 ## Moving booking
+![moving_booking](https://i.imgur.com/vwvVTVc.gif)\
 
+### Sidebar
+![sidebar](https://i.imgur.com/OSyFxu7.gif)\
 
-## Sidebar
+## Customer
+![customer](https://i.imgur.com/gmcvb90.gif)\
 
+## Notes
+![notes](https://i.imgur.com/RHVvMuG.gif)\
 
-
+## Searching Customer
+![searching](https://i.imgur.com/kZcLx4r.gif)\
 
 
